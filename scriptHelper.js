@@ -63,6 +63,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
       window.addEventListener("load", function() {
          let form = document.querySelector("form");
          form.addEventListener("submit", function(event) {
+            event.preventDefault()
             let pilotNameInput = document.querySelector("input[name=pilotName]");
             let copilotNameInput = document.querySelector("input[name=copilotName]");
             let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
@@ -126,13 +127,14 @@ async function myFetch() {
     let response = await fetch("https://handlers.education.launchcode.org/static/planets.json");
     let planetsReturned = await response.json();
     console.log(planetsReturned);
-
+   return planetsReturned
 }
 
 function pickPlanet(planets) {
 
-   chosenPlanet = Math.random()*planets.length
+   chosenPlanet = Math.floor(Math.random()*planets.length)
    //return chosenPlanet? It's a number/index
+   return planets[chosenPlanet]
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;

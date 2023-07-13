@@ -14,14 +14,21 @@ window.addEventListener("load", function() {
        listedPlanets = result;
        console.log(listedPlanets);
    }).then(function () {
-       console.log(listedPlanets);
+       console.log(listedPlanets)
     //    Below this comment call the appropriate 
     //    helper functions to pick a planet 
     //    fom the list of planets and add 
     //    that information to your destination.
 
     let chosenPlanet = pickPlanet(listedPlanets)
-    //addDestinationInfo(chosenPlanet properties)
+
+    addDestinationInfo(document, 
+                       chosenPlanet.name, 
+                       chosenPlanet.diameter, 
+                       chosenPlanet.star, 
+                       chosenPlanet.distance,
+                       chosenPlanet.moon,
+                       chosenPlanet.imageUrl)
    })
    
 });
