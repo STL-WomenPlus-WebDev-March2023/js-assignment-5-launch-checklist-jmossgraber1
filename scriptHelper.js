@@ -1,11 +1,10 @@
 // Write your helper functions here!
-require('isomorphic-fetch');
+require ('isomorphic-fetch');
 
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl){
    let destinationInfoLocation = document.getElementById("missionTarget");
-   destinationInfoLocation.innerHTML = 
-//does this need parenthesis?
+   destinationInfoLocation.innerHTML =
          `<div>
          <h2>Mission Destination</h2><ol>
          <li>Name: ${name}</li>
@@ -18,97 +17,111 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
          
 }
   
-               function validateInput(testInput) {window.addEventListener("load", function () {
-               let form = document.querySelector("form");
-               form.addEventListener("submit", function (event) {
-                  let pilotNameInput = document.querySelector("input[name=pilotName]");
-                  let copilotNameInput = document.querySelector("input[name=copilotName]");
-                  let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-                  let cargoMassInput = document.querySelector("input[name=cargoMass]");
-                  
-                  if (pilotNameInput === "" || copilotNameInput === "" || fuelLevelInput === "" || cargoMassInput === "") {
-                     alert("All fields are required!");
-                     // event.preventDefault();
-                    return false;
+               function validateInput(testInput) {
+                  let numberInput = Number(testInput)
+                  if (testInput === ""){
+                    return "Empty field";
                   }
-                  if (!isNaN(pilotNameInput) || !isNaN(copilotNameInput)) {
-                     alert("Please do not enter a number in a name field");
-                     // event.preventDefault();
-                    return false;
+                 else if (isNaN(numberInput)) {
+                    return "Not a number";
+                 }
+                 else if (isNaN(testInput)) {
+                  return "Not a number";}
+
+                 else if (isNaN(numberInput) === false){
+                    return "Is a number";
+                  }
+                  else if (isNaN(testInput) === false){
+                     return "Is a number";
+                  }
                   }
 
-                  if (isNaN(fuelLevelInput) || isNaN(cargoMassInput)) {
-                     alert("Please enter a number in the fuel and cargo fields");
-                     // event.preventDefault();
-                     return false;
-                  }
-
-                  else {
-                     return true;
-                     // return validateInput(testInput) = true;
-                  }
-               });
-            })
-            }
-
+            
+         
             function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-               if (validateInput(testInput) = true){
-                  
+               let pilotNameStatus = document.getElementById("pilotStatus");
+               let copilotStatus = document.getElementById("copilotStatus");
+               let fuelLevelStatus = document.getElementById("fuelStatus");
+               let cargoMassStatus = document.getElementById("cargoStatus");
+               let launchStatus = document.getElementById('launchStatus');
+               let faultyItemsList = document.getElementById('faultyItems');
+              
+
+               if (validateInput(pilot) === "Empty field" || validateInput(pilot) === "Is a number"){
+                  alert("Invalid input");
+
+               }
+               if (validateInput(copilot) === "Empty field"||validateInput(copilot) === "Is a number"){
+                  alert("Invalid input");
+
+               }
+               if (validateInput(fuelLevel) === "Empty field" ||validateInput(fuelLevel) === "Not a number"){
+                  alert("Invalid input");
+
+               }
+               if (validateInput(cargoLevel) === "Empty field"||validateInput(cargoLevel) === "Not a number"){
+                  alert("Invalid input");
+
+               }
+
+               else{
+                  faultyItemsList.style.visibility = "visible";
+                  pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`
+                  copilotStatus.innerHTML =`Copilot ${copilot} is ready for launch`;
+              
+                  //there will be three if statments combining the conditions
+
+                     // FUEL LEVEL 
+                  if (fuelLevelStatus < 10000) {
+                     faultyItemsList.style.visibility = "visible";
+                     // faultyItemsList.pilotStatus.innerHTML = `${pilot} is not ready for launch!`;
+                     // faultyItemsList.copilotStatus.innerHTML = `${copilot} is not ready for launch!`;
+                     launchStatus.innerHTML = "Shuttle not ready for launch";
+                     launchStatus.style.color = red; //how do i put the color in? just a string?
+                     fuelLevelStatus.innerHTML = "There is not enough fuel for the journey!";
+                     // event.preventDefault();
+                  }
+               }
+//START the conditionals here
+
                // window.addEventListener("load", function () {
                // let form = document.querySelector("form");
                // form.addEventListener("submit", function (event) {
                //    // event.preventDefault();
 
-                  let pilotNameInput = document.querySelector("input[name=pilotName]");
-                  let copilotNameInput = document.querySelector("input[name=copilotName]");
-                  let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-                  let cargoMassInput = document.querySelector("input[name=cargoMass]");
-                  let faultyItemsList = document.getElementById('faultyItems');
-                  let launchStatus = document.querySelector('launchStatus');
+                  
 
-                  //FUEL LEVEL 
-                  if (fuelLevelInput < 10000) {
-                     faultyItemsList.style.visibility = "visible";
-                     faultyItemsList.pilotStatus.innerHTML = `${pilotNameInput} is not ready for launch!`;
-                     faultyItemsList.copilotStatus.innerHTML = `${copilotNameInput} is not ready for launch!`;
-                     launchStatus.innerHTML = "Shuttle not ready for launch";
-                     launchStatus.style.color = red; //how do i put the color in? just a string?
-                     faultyItemsList.fuelStatus.innerHTML = "There is not enough fuel for the journey!";
-                     // event.preventDefault();
-                  }
+               
 
-                  //CARGO MASS
-                  if (cargoMassInput > 10000) {
-                     faultyItemsList.style.visibility = "visible";
-                     faultyItemsList.pilotStatus.innerHTML = `${pilotNameInput} is not ready for launch!`;
-                     faultyItemsList.copilotStatus.innerHTML = `${copilotNameInput} is not ready for launch!`;
-                     launchStatus.innerHTML = "Shuttle not ready for launch";
-                     launchStatus.style.color = red; //how do i put the color in? just a string?
-                     faultyItemsList.cargoStatus.innerHTML = "Too much mass to take off!";
-                     // event.preventDefault();
-                  }
+               //    //CARGO MASS
+               //    if (cargoMassStatus > 10000) {
+               //       faultyItemsList.style.visibility = "visible";
+               //       faultyItemsList.pilotStatus.innerHTML = `${pilotNameInput} is not ready for launch!`;
+               //       faultyItemsList.copilotStatus.innerHTML = `${copilotStatus} is not ready for launch!`;
+               //       launchStatus.innerHTML = "Shuttle not ready for launch";
+               //       launchStatus.style.color = red; //how do i put the color in? just a string?
+               //       faultyItemsList.cargoStatus.innerHTML = "Too much mass to take off!";
+               //       // event.preventDefault();
+               //    }
 
-                  else {
-                     faultyItemsList.style.visibility = "visible"; // or INVISIBLE?
-                     faultyItemsList.pilotStatus.innerHTML = `${pilotNameInput} is ready for launch!`;
-                     faultyItemsList.copilotStatus.innerHTML = `${copilotNameInput} is ready for launch!`;
-                     faultyItemsList.
-                     launchStatus.innerHTML = "Shuttle ready for launch!";
-                     launchStatus.style.color = green;
-                  }
+               //    else {
+               //       faultyItemsList.style.visibility = "visible"; // or INVISIBLE?
+               //       faultyItemsList.pilotStatus.innerHTML = `${pilotNameInput} is ready for launch!`;
+               //       faultyItemsList.copilotStatus.innerHTML = `${copilotStatus} is ready for launch!`;
+               //       faultyItemsList.
+               //       launchStatus.innerHTML = "Shuttle ready for launch!";
+               //       launchStatus.style.color = green;
+               //    }
+            }
 
-               }
+   
 
                   async function myFetch() {
 
-                     let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json");
-                     let response = await response.json();
-                        return response
-                     }
-                     myFetch.then(response => {
-                        response;
-                     } )
-                  return planetsReturned
+                     let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(
+                        (response) => {return response.json()})
+                        return planetsReturned
+                  }
                      
                      // console.log(planetsReturned)
 
@@ -118,7 +131,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                      return planets[randomPlanetIndex];
                   }
             
-               }
+               
                module.exports.addDestinationInfo = addDestinationInfo;
                module.exports.validateInput = validateInput;
                module.exports.formSubmission = formSubmission;

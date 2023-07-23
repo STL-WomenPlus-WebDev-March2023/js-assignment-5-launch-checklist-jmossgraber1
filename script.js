@@ -1,16 +1,13 @@
 // Write your JavaScript code here!
 
-const { pickPlanet } = require("./scriptHelper");
-const {addDestinationInfo} = require("./scriptHelper");
-const {formSubmission} = require("./scriptHelper")
-const {myFetch} = require("./scriptHelper")
 
 window.addEventListener("load", function() {
 
-    let listedPlanets = [];
+    let listedPlanets;
     let listedPlanetsResponse =  myFetch()
-    listedPlanetsResponse.then(function (result) {
+    listedPlanetsResponse.then((result) => {
        listedPlanets = result;
+       console.log(result)
        console.log(listedPlanets);
    }).then(function () {
        console.log(listedPlanets);
@@ -23,15 +20,13 @@ window.addEventListener("load", function() {
                        chosenPlanet.star, 
                        chosenPlanet.distance,
                        chosenPlanet.moon,
-                       chosenPlanet.imageUrl)
+                       chosenPlanet.image)
 
    })
-
-
 //    window.addEventListener("load", function () {
     let form = document.querySelector("form");
     form.addEventListener("submit", function (event) {
-       // event.preventDefault();
+       event.preventDefault();
        let pilotName = document.querySelector("input[name=pilotName]");
        let pilot = pilotName.value
        let copilotName = document.querySelector("input[name=copilotName]");
