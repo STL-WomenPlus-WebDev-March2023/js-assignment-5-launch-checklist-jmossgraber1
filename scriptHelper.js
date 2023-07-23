@@ -41,10 +41,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
                let pilotNameStatus = document.getElementById("pilotStatus");
                let copilotStatus = document.getElementById("copilotStatus");
-               let fuelLevelStatus = document.getElementById("fuelStatus");
-               let cargoMassStatus = document.getElementById("cargoStatus");
+               // let fuelLevelStatus = document.getElementById("fuelStatus");
+               // let cargoMassStatus = document.getElementById("cargoStatus");
                let launchStatus = document.getElementById('launchStatus');
                let faultyItemsList = document.getElementById('faultyItems');
+
+               let fuelLevelForm = document.querySelector("input[name=fuelLevel]");
+               let fuelLevelValue = fuelLevelForm.value
+               let cargoLevelForm = document.querySelector("input[name=cargoMass]");
+               let cargoLevelValue = cargoLevelForm.value
               
 
                if (validateInput(pilot) === "Empty field" || validateInput(pilot) === "Is a number"){
@@ -66,22 +71,44 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
                else{
                   faultyItemsList.style.visibility = "visible";
-                  pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`
+                  pilotNameStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
                   copilotStatus.innerHTML =`Copilot ${copilot} is ready for launch`;
-              
-                  //there will be three if statments combining the conditions
-
+                  launchStatus.innerHTML = "not quite sure";
+                  //there will be three if statments combining the conditionals
                      // FUEL LEVEL 
-                  if (fuelLevelStatus < 10000) {
+                  if (fuelLevelValue < 10000 && cargoLevelValue > 10000) {
                      faultyItemsList.style.visibility = "visible";
-                     // faultyItemsList.pilotStatus.innerHTML = `${pilot} is not ready for launch!`;
-                     // faultyItemsList.copilotStatus.innerHTML = `${copilot} is not ready for launch!`;
-                     launchStatus.innerHTML = "Shuttle not ready for launch";
-                     launchStatus.style.color = red; //how do i put the color in? just a string?
-                     fuelLevelStatus.innerHTML = "There is not enough fuel for the journey!";
+                     launchStatus.innerHTML = "Shuttle NOT ready for launch";
+                     pilotNameStatus.innerHTML = `Pilot ${pilot} NOT ready for launch`;
+                     copilotStatus.innerHTML =`Copilot ${copilot} NOT ready for launch`;
+                     launchStatus.style.color = "#dc143c" 
+                     fuelLevelStatus.innerHTML = "Insufficient fuel!";
+                     cargoMassStatus.innerHTML = "Reduce cargo! Mass exceeds limit";
                      // event.preventDefault();
                   }
+                  else if (fuelLevelValue < 10000 && cargoLevelValue <= 10000) {
+                        faultyItemsList.style.visibility = "visible";
+                        launchStatus.innerHTML = "Shuttle NOT ready for launch";
+                        pilotNameStatus.innerHTML = `Pilot ${pilot} NOT ready for launch`;
+                        copilotStatus.innerHTML =`Copilot ${copilot} NOT ready for launch`;
+                        launchStatus.style.color = "#dc143c" 
+                        fuelLevelStatus.innerHTML = "Insufficient fuel!";
+                        // cargoMassStatus.innerHTML = "Reduce cargo! Mass exceeds limit";
                }
+               else if (fuelLevelValue >= 10000 && cargoLevelValue <= 10000) {
+                  faultyItemsList.style.visibility = "visible";
+                  launchStatus.innerHTML = "Shuttle ready for launch";
+                  pilotNameStatus.innerHTML = `Pilot ${pilot} ready for launch`;
+                  copilotStatus.innerHTML =`Copilot ${copilot} ready for launch`;
+                  launchStatus.style.color = "#3cb371" 
+                  // cargoMassStatus.innerHTML = "Reduce cargo! Mass exceeds limit";
+         }
+            
+            }
+         }
+
+
+
 //START the conditionals here
 
                // window.addEventListener("load", function () {
@@ -89,10 +116,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                // form.addEventListener("submit", function (event) {
                //    // event.preventDefault();
 
-                  
-
-               
-
+   
                //    //CARGO MASS
                //    if (cargoMassStatus > 10000) {
                //       faultyItemsList.style.visibility = "visible";
@@ -112,7 +136,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
                //       launchStatus.innerHTML = "Shuttle ready for launch!";
                //       launchStatus.style.color = green;
                //    }
-            }
+      
 
    
 
