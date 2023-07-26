@@ -41,8 +41,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
                let pilotNameStatus = document.getElementById("pilotStatus");
                let copilotStatus = document.getElementById("copilotStatus");
-               // let fuelLevelStatus = document.getElementById("fuelStatus");
-               // let cargoMassStatus = document.getElementById("cargoStatus");
+               let fuelLevelStatus = document.getElementById("fuelStatus");
+               let cargoMassStatus = document.getElementById("cargoStatus");
                let launchStatus = document.getElementById('launchStatus');
                let faultyItemsList = document.getElementById('faultyItems');
 
